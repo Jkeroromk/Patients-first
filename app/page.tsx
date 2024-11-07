@@ -1,6 +1,9 @@
+import React, { useState, useEffect } from 'react';
 import PatientForm from "@/components/ui/forms/PatientForm";
 import { Link } from "lucide-react";
 import Image from "next/image";
+
+
 
 export default function Home() {
   return (
