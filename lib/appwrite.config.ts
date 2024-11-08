@@ -1,9 +1,11 @@
+// lib/appwrite.config.js
+
 import * as sdk from "node-appwrite";
 
 export const {
-  PROJECR_ID,
+  PROJECT_ID,
   API_KEY,
-  DATABAES_ID,
+  DATABASE_ID,
   PATIENT_COLLECTION_ID,
   DOCTOR_COLLECTION_ID,
   APPOINTMENT_COLLECTION_ID,
@@ -11,12 +13,16 @@ export const {
   NEXT_PUBLIC_ENDPOINT: ENDPOINT,
 } = process.env;
 
-const client = new sdk.Client();
+if (!ENDPOINT || !PROJECT_ID || !API_KEY) {
+  throw new Error("Environment variables for Appwrite configuration are missing.");
+}
 
-client.setEndpoint(ENDPOINT!).setProject(PROJECR_ID!).setKey(API_KEY!);
+export const client = new sdk.Client();
+client.setEndpoint(ENDPOINT).setProject(PROJECT_ID).setKey(API_KEY);
 
 export const database = new sdk.Databases(client);
 export const storage = new sdk.Storage(client);
-export const messageing = new sdk.Messaging(client);
+export const messaging = new sdk.Messaging(client);
 export const users = new sdk.Users(client);
+
 
